@@ -6,7 +6,7 @@ import 'package:sharecare/common/custom_container.dart';
 import 'package:sharecare/common/heading.dart';
 import 'package:sharecare/common/reusabletext.dart';
 import 'package:sharecare/constants/constants.dart';
-import 'package:sharecare/views/Donate/widgets/widgets/bannercontainer.dart';
+import 'package:sharecare/views/Donate/bannercontainer.dart';
 import 'package:sharecare/views/home/urgent_needs.dart';
 import 'package:sharecare/views/home/widgets/category_list.dart';
 import 'package:sharecare/views/home/widgets/urgent_needs_list.dart';
