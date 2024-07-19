@@ -46,3 +46,34 @@ class _FundsPageState extends State<FundsPage> {
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
+    child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Most Donated Amounts',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8.0),
+              _buildMostDonatedAmountsRow(),
+              SizedBox(height: 16.0),
+              DropdownButtonFormField<String>(
+                value: _selectedCurrency,
+                items: <String>['USD', 'EUR', 'GBP', 'UGX'] // Add more currencies as needed
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedCurrency = newValue!;
+                  });
+                },
+                decoration: InputDecoration(
+                  labelText: 'Select Currency',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                ),
+              ),
