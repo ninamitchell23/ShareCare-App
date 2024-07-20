@@ -4,7 +4,7 @@ import 'package:sharecare/common/app_style.dart';
 //import 'package:sharecare/common/background_container.dart';
 import 'package:sharecare/common/reusabletext.dart';
 import 'package:sharecare/constants/constants.dart';
-import 'package:sharecare/views/categories/food_M/confirmation_page.dart';
+import 'package:sharecare/views/categories/FOOD/confirmation_page.dart';
 
 class FoodDonationForm extends StatefulWidget {
   const FoodDonationForm({super.key});
