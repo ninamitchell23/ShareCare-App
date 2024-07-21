@@ -1,91 +1,84 @@
 List<dynamic> categories = [
   {
-    "_id": "0",
+    "_id": "6537ece708ff5b7de97d0695",
     "title": "Food",
-    "value": "Normal_food",
+    "value": "Food",
     "imageUrl":
-        "assets/images/rating_bk.jpg",
+        "assets/images/food1.png",
     "createdAt": "2023-10-24T16:12:23.571Z",
     "updatedAt": "2023-10-24T16:12:23.571Z",
     "__v": 0
   },
   {
-    "_id": "1",
+    "_id": "65310f3381e4d98d60b093c5",
     "title": "Clothes",
     "value": "Clothes",
     "imageUrl":
-        "assets/images/rating_bk.jpg",
+        "assets/images/clothes.png",
     "__v": 0
   },
   {
-    "_id": "2",
+    "_id": "6531206cbbe4998e90af3feb",
     "title": "Funds",
     "value": "Funds",
     "imageUrl":
-        "assets/images/rating_bk.jpg",
+        "assets/images/money.png",
         
     "__v": 0
   },
   {
-    "_id": "3",
-    "title": "Babycare Items",
+    "_id": "6531209dbbe4998e90af3fef",
+    "title": "Babycare",
     "value": "Babycare Items",
     "imageUrl":
-        "assets/images/rating_bk.jpg",
+        "assets/images/baby.png",
     "__v": 0
   },
   {
-    "_id": "4",
+    "_id": "653120babbe4998e90af3ff1",
     "title": "Beverages",
     "value": "beverages",
     "imageUrl":
-        "assets/images/rating_bk.jpg",
+        "assets/images/drinks.png",
     "__v": 0
   },
   {
-    "_id": "5",
+    "_id": "65312084bbe4998e90af3fed",
     "title": "Education",
     "value": "Education",
     "imageUrl":
-        "assets/images/rating_bk.jpg",
+        "assets/images/books.png",
     "__v": 0
   },
+ 
   {
-    "_id": "6",
-    "title": "Chicken",
-    "value": "chicken",
-    "imageUrl":
-        "assets/images/rating_bk.jpg",
-    "__v": 0
-  },
-  {
-    "_id": "7",
+    "_id": "653120e1bbe4998e90af3ff3",
     "title": "More",
     "value": "more",
     "imageUrl":
-        "assets/images/rating_bk.jpg",
+        "assets/images/more.png",
     "__v": 0
   }
 ];
 
-const restaurants = [
+List<dynamic> urgentneeds = [
   {
     "_id": "6530ebbcc9e72013e5b65933",
     "title": "Lapisara Eatery",
     "time": "6:00am - 9:00pm",
     "imageUrl":
-        "https://d326fntlu7tb1e.cloudfront.net/uploads/5c2a9ca8-eb07-400b-b8a6-2acfab2a9ee2-image001.webp",
+        "assets/images/need1.jpg",
     "owner": "fdfsdfsdfs",
     "code": "41007428",
     "logoUrl":
-        "https://d326fntlu7tb1e.cloudfront.net/uploads/5c2a9ca8-eb07-400b-b8a6-2acfab2a9ee2-image001.webp",
+        "assets/images/need1.jpg",
     "rating": 5,
     "ratingCount": "6765",
     "coords": {
       "id": "2023",
       "latitude": 37.78792117665919,
       "longitude": -122.41325651079953,
-      "address": "698 Post St, San Francisco, CA 94109, United States",
+      "address": "Nsambya, Kampala, Uganda",
       "title": "Lapisara Eatery",
       "latitudeDelta": 0.0122,
       "longitudeDelta": 0.0221
@@ -96,18 +89,18 @@ const restaurants = [
     "title": "Burger King",
     "time": "6:00am - 9:00pm",
     "imageUrl":
-        "https://d326fntlu7tb1e.cloudfront.net/uploads/5c2a9ca8-eb07-400b-b8a6-2acfab2a9ee2-image001.webp",
+        "assets/images/need2.jpg",
     "owner": "sjgdsjgfjshhjs",
     "code": "41007428",
     "logoUrl":
-        "https://d326fntlu7tb1e.cloudfront.net/uploads/5c2a9ca8-eb07-400b-b8a6-2acfab2a9ee2-image001.webp",
+        "assets/images/need2.jpg",
     "rating": 5,
     "ratingCount": "3278",
     "coords": {
       "id": "2020",
       "latitude": 37.785925590588505,
       "longitude": -122.41007428687641,
-      "address": "333 O'Farrell St, San Francisco, CA 94102, United States",
+      "address": "Entebbe, Kampala, Uganda",
       "title": "Burger King",
       "latitudeDelta": 0.0122,
       "longitudeDelta": 0.0221
@@ -118,18 +111,18 @@ const restaurants = [
     "title": "La Foods",
     "time": "6:00am - 9:00pm",
     "imageUrl":
-        "https://d326fntlu7tb1e.cloudfront.net/uploads/5c2a9ca8-eb07-400b-b8a6-2acfab2a9ee2-image001.webp",
+        "assets/images/need3.jpg",
     "owner": "fgdgdfgd",
     "code": "41007428",
     "logoUrl":
-        "https://d326fntlu7tb1e.cloudfront.net/uploads/5c2a9ca8-eb07-400b-b8a6-2acfab2a9ee2-image001.webp",
+        "assets/images/need3.jpg",
     "rating": 5,
     "ratingCount": "5666",
     "coords": {
       "id": "2022",
       "latitude": 37.787503258917035,
       "longitude": -122.39854938269353,
-      "address": "333 O'Farrell St, San Francisco, CA 94102, United States",
+      "address": "Mukono, Kampala, Uganda",
       "title": "La Foods",
       "latitudeDelta": 0.0122,
       "longitudeDelta": 0.0221
@@ -140,23 +133,79 @@ const restaurants = [
     "title": "Italian Restaurant",
     "time": "6:00am - 9:00pm",
     "imageUrl":
-        "https://d326fntlu7tb1e.cloudfront.net/uploads/5c2a9ca8-eb07-400b-b8a6-2acfab2a9ee2-image001.webp",
+        "assets/images/need4.jpg",
     "owner": "sjgdsjgfjshhjs",
     "code": "41007428",
     "logoUrl":
-        "https://d326fntlu7tb1e.cloudfront.net/uploads/5c2a9ca8-eb07-400b-b8a6-2acfab2a9ee2-image001.webp",
+        "assets/images/need4.jpg",
     "rating": 5,
     "ratingCount": "3278",
     "coords": {
       "id": "2021",
       "latitude": 37.78557922976825,
       "longitude": -122.40722000299483,
-      "address": "333 O'Farrell St, San Francisco, CA 94102, United States",
+      "address": "Ntinda, Kampala, Uganda",
       "title": "Italian Restaurant",
       "latitudeDelta": 0.0122,
       "longitudeDelta": 0.0221
     }
   }
+];
+
+List<dynamic> volunteers = [
+  {
+    "_id": "v1",
+    "title": "Distribution of food",
+    "time": "6:00am - 9:00pm",
+    "imageUrl":
+        "assets/images/vol1.jpg",
+    "description":
+        "Aid us along the way to reaching the available food products to those in need ",
+  },
+  {
+    "_id": "v2",
+    "title": "Mobilizing the Public",
+    "time": "6:00am - 9:00pm",
+    "imageUrl":
+        "assets/images/vol2.jpg",
+    "description":
+        "Join us in the mobilization of the general public in the helping of the needy.",
+  },
+ 
+];
+
+
+
+List<dynamic> impacts = [
+  {
+    "_id": "im",
+    "title": "Acquision of study materials",
+    "time": "6:00am - 9:00pm",
+    "imageUrl":
+        "assets/images/imp2.jpg",
+    "description":
+        "Aid us along the way to reaching the available food products to those in need ",
+  },
+  {
+    "_id": "im1",
+    "title": "Volunteers extended skills",
+    "time": "6:00am - 9:00pm",
+    "imageUrl":
+        "assets/images/imp1.jpg",
+    "description":
+        "The volunteers from different expertise help the orphages in the practical skills.",
+  },
+
+   {
+    "_id": "im2",
+    "title": "Sports made easy",
+    "time": "6:00am - 9:00pm",
+    "imageUrl":
+        "assets/images/imp.jpg",
+    "description":
+        "Join us in the mobilization of the general public in the helping of the needy.",
+  },
+ 
 ];
 
 List <Map<String, dynamic>> foods = [
