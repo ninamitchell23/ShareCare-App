@@ -11,7 +11,7 @@ class Bannercontainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 0.38,
       child: ClipRRect(
         borderRadius: BorderRadius.all(
           Radius.circular(25.r)
@@ -19,9 +19,10 @@ class Bannercontainer extends StatelessWidget {
         child: Container(
           width: width*0.94,
           color: kPrimary,
-          child: SingleChildScrollView(
-            child: containerContents,
-          ),
+          child: containerContents,
+          // child: SingleChildScrollView(
+          //   child: containerContents,
+          // ),
         ),
       ),
     );
