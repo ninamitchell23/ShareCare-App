@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sharecare/constants/constants.dart';
 import 'package:sharecare/controllers/tab_index_controller.dart';
-import 'package:sharecare/views/history/history.dart';
+import 'package:sharecare/views/history/history_page.dart';
 import 'package:sharecare/views/home/home_page.dart';
 import 'package:sharecare/views/profile/profile_page.dart';
 import 'package:sharecare/views/Donate/donate_page.dart';
