@@ -23,7 +23,10 @@ class CustomButton extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         iconColor: Colors.blue,
       ),
-      child: const Text("View Details"),
+      child: const Text(
+        "View Details",
+        style:TextStyle(color: kPrimary),
+        ),
     );
   }
 }
