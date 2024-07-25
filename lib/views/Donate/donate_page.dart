@@ -96,8 +96,6 @@ class _DonatePageState extends State<DonatePage> {
                           ),
                         ),
                         CustomButton(
-                          text: "View Details",
-                          textColor: kPrimary,
                           onPressed: () {
                                 Navigator.push( 
                                   context, 
