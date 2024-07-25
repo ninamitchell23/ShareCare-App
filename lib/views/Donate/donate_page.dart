@@ -39,7 +39,7 @@ class _DonatePageState extends State<DonatePage> {
     return Scaffold(
       backgroundColor: kPrimary,
       appBar: AppBar(
-        backgroundColor: kPrimary,
+        backgroundColor: kOffWhite,
         title: Center(
           child: ReusableText(
             text: "Donate",
@@ -96,6 +96,7 @@ class _DonatePageState extends State<DonatePage> {
                           ),
                         ),
                         CustomButton(
+
                           onPressed: () {
                                 Navigator.push( 
                                   context, 
