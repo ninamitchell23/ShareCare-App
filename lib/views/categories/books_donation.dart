@@ -62,3 +62,45 @@ class _DonationPageState extends State<DonationPage> {
                 ),
               ),
               const SizedBox(height: 20),
+                           // Quantity Adjuster
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Quantity', style: TextStyle(fontSize: 16)),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.remove, color: Color.fromARGB(255, 111, 207, 32)),
+                        onPressed: () {
+                          setState(() {
+                            if (_quantity > 1) _quantity--;
+                          });
+                        },
+                      ),
+                      Text(_quantity.toString(), style: const TextStyle(fontSize: 16)),
+                      IconButton(
+                        icon: const Icon(Icons.add, color: Color.fromARGB(255, 111, 207, 32)),
+                        onPressed: () {
+                          setState(() {
+                            _quantity++;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // Description Text Area
+              TextFormField(
+                controller: _descriptionController,
+                maxLines: 5,
+                decoration: const InputDecoration(
+                  labelText: 'Description',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+             
