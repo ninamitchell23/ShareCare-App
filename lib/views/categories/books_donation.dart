@@ -102,5 +102,47 @@ class _DonationPageState extends State<DonationPage> {
                 ),
               ),
               const SizedBox(height: 20),
+                          // Image Upload Section
+              GestureDetector(
+                onTap: _pickImage,
+                child: Container(
+                  width: double.infinity,
+                  height: 150,
+                  color: Colors.grey[200],
+                  child: _imageFile != null
+                      ? Image.file(
+                          _imageFile!,
+                          fit: BoxFit.cover,
+                        )
+                      : const Center(
+                          child: Text(
+                            'Tap to select an image',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Submit Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const BooksDonationForm()),
+                    );
+                  },
+                  child: const Text('Next'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
              
