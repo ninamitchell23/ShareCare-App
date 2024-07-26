@@ -98,3 +98,117 @@ class _BabyDonationFormState extends State<BabyDonationForm> {
             'e.g. powdered milk (5tins or packets)',
         border: OutlineInputBorder(),
       ),
+maxLines: 3,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter some details';
+        }
+        return null;
+      },
+    );
+  }
+
+  Widget _buildQuantitySelector() {
+    return Row(
+      children: [
+        const Text('Quantity'),
+        const Spacer(),
+        IconButton(
+          icon: const Icon(Icons.remove),
+          onPressed: () {
+            if (_quantity > 1) {
+              setState(() {
+                _quantity--;
+              });
+            }
+          },
+        ),
+        Text('$_quantity'),
+        IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () {
+            setState(() {
+              _quantity++;
+            });
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildVehicleSelector() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Vehicle Preference'),
+        Row(
+          children: [
+            const Icon(Icons.motorcycle),
+            Radio(
+              value: 'Motorcycle',
+              groupValue: _vehicleType,
+              onChanged: (String? value) {
+                setState(() {
+                  _vehicleType = value;
+                });
+              },
+            ),
+            const Icon(Icons.car_rental),
+            Radio(
+              value: 'Car',
+              groupValue: _vehicleType,
+              onChanged: (String? value) {
+                setState(() {
+                  _vehicleType = value;
+                });
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildWishMessageField() {
+    return TextFormField(
+      decoration: const InputDecoration(
+        labelText: 'Add a message (optional)',
+        hintText: 'hope this helps ',
+        border: OutlineInputBorder(),
+      ),
+      maxLines: 2,
+    );
+  }
+
+  Widget _buildAnonymousSwitch() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Text('Donate anonymously?'),
+        Switch(
+          value: _isAnonymous,
+          onChanged: (value) {
+            setState(() {
+              _isAnonymous = value;
+            });
+          },
+        ),
+      ],
+    );
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      // Process the data and navigate to the next page
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FundsPage(),
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Form submitted successfully!')),
+      );
+    }
+  }
+}
