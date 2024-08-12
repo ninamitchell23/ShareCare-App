@@ -76,4 +76,36 @@ class _MyHomePageState extends State<MyHomePage> {
                                       "currency": "USD"
                                     }
                                   ],
+                                  
+                                  // shipping address is not required though
+                                  "shipping_address": {
+                                    "recipient_name": "Jane Foster",
+                                    "line1": "Travis County",
+                                    "line2": "",
+                                    "city": "Austin",
+                                    "country_code": "US",
+                                    "postal_code": "73301",
+                                    "phone": "+00000000",
+                                    "state": "Texas"
+                                  },
+                                }
+                              }
+                            ],
+                            note: "Contact us for any questions on your order.",
+                            onSuccess: (Map params) async {
+                              print("onSuccess: $params");
+                            },
+                            onError: (error) {
+                              print("onError: $error");
+                            },
+                            onCancel: (params) {
+                              print('cancelled: $params');
+                            }),
+                      ),
+                    )
+                  },
+              child: const Text("Make Payment")),
+        ));
+  }
+}
 
