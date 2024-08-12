@@ -1,22 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sharecare/common/app_style.dart';
-//import 'package:sharecare/common/background_container.dart';
 import 'package:sharecare/common/reusabletext.dart';
 import 'package:sharecare/constants/constants.dart';
-import 'package:sharecare/views/categories/FOOD/confirmation_page.dart';
+
+import 'package:sharecare/views/categories/FOOD%20copy/confirmation_page.dart';
 
 class FoodDonationForm extends StatefulWidget {
   const FoodDonationForm({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _FoodDonationFormState createState() => _FoodDonationFormState();
 }
 
 class _FoodDonationFormState extends State<FoodDonationForm> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _foodItemsController = TextEditingController();
   final TextEditingController _cookedDateController = TextEditingController();
   final TextEditingController _expiryDateController = TextEditingController();
+  final TextEditingController _wishMessageController = TextEditingController();
   final DateFormat _dateFormat = DateFormat('dd.MM.yyyy, hh:mm a');
 
   String? _selectedSource;
@@ -24,6 +30,77 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
   String? _vehicleType;
   bool _isAnonymous = false;
   int _quantity = 1;
+
+  //  void _submitForm() {
+  //   if (_formKey.currentState!.validate()) {
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => ConfirmationPage(
+  //           selectedSource: _selectedSource,
+  //           foodType: _foodType,
+  //           vehicleType: _vehicleType,
+  //           quantity: _quantity,
+  //           isAnonymous: _isAnonymous,
+  //         ),
+  //       ),
+  //     );
+  //   }
+  // }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      // Prepare the donation data to be submitted
+      Map<String, dynamic> donationData = {
+        'category': 'Food',  
+        'foodType': _foodType,
+        'vehicleType': _vehicleType,
+        'quantity': _quantity,
+        'isAnonymous': _isAnonymous,
+        
+      };
+
+      // Call the submitDonation function to add the data to Firestore
+      submitDonation(donationData);
+
+      // Navigate to the ConfirmationPage after successful submission
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ConfirmationPage(
+            selectedSource: _selectedSource,
+            foodType: _foodType,
+            vehicleType: _vehicleType,
+            quantity: _quantity,
+            isAnonymous: _isAnonymous,
+          ),
+        ),
+      );
+    }
+  }
+
+  void submitDonation(Map<String, dynamic> donationData) {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      donationData['userId'] = user.uid;
+      donationData['donationDate'] = FieldValue.serverTimestamp(); 
+
+      // Add the donation data to Firestore
+      FirebaseFirestore.instance.collection('donations').add(donationData).then((_) {
+        // Optional: Handle post-submission logic here if needed
+      }).catchError((error) {
+        // Optional: Handle any errors that occur during submission
+        if (kDebugMode) {
+          print("Error adding donation: $error");
+        }
+      });
+    } else {
+      // Handle the case where the user is not authenticated
+      if (kDebugMode) {
+        print("No user is currently signed in.");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,39 +122,34 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
               children: [
                 const Text('Select Source of Food'),
                 _buildSourceSelector(),
-                SizedBox(height: 16.0),
-                Text('Food Type'),
+                const SizedBox(height: 16.0),
+                const Text('Food Type'),
                 _buildFoodTypeSelector(),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: kGrayLight),
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Add border radius
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: _buildFoodItemsField(),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: kPrimaryLight),
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Add border radius
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: _buildDateTimePicker(
-                      'Cooked Date & Time', _cookedDateController),
+                  child: _buildDateTimePicker('Cooked Date & Time', _cookedDateController),
                 ),
                 const SizedBox(height: 10.0, width: 10),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: kPrimaryLight),
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Add border radius
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: _buildDateTimePicker(
-                      'Expiry Date & Time', _expiryDateController),
+                  child: _buildDateTimePicker('Expiry Date & Time', _expiryDateController),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 _buildQuantitySelector(),
                 const SizedBox(height: 16.0),
                 _buildVehicleSelector(),
@@ -85,21 +157,20 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: kPrimaryLight),
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Add border radius
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: _buildWishMessageField(),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 _buildAnonymousSwitch(),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: kPrimary, // Turquoise color
-                    foregroundColor: Colors.white, // White text color
+                    backgroundColor: kPrimary,
+                    foregroundColor: Colors.white,
                   ),
                   onPressed: _submitForm,
-                  child: Text('Next'),
+                  child: const Text('Next'),
                 ),
               ],
             ),
@@ -147,13 +218,19 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
 
   Widget _buildFoodItemsField() {
     return TextFormField(
-      decoration: InputDecoration(
+      controller: _foodItemsController,
+      decoration: const InputDecoration(
         labelText: 'Food Items',
-        hintText:
-            'e.g. 1. Rice - 5kg\n2. Sambar - 6 liters\n3. Potato fries - 4kg',
+        hintText: 'e.g. 1. Rice - 5kg\n2. Sambar - 6 liters\n3. Potato fries - 4kg',
         border: OutlineInputBorder(),
       ),
       maxLines: 3,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter the food items';
+        }
+        return null;
+      },
     );
   }
 
@@ -162,9 +239,9 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
       controller: controller,
       decoration: InputDecoration(
         labelText: label,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         suffixIcon: IconButton(
-          icon: Icon(Icons.calendar_today),
+          icon: const Icon(Icons.calendar_today),
           onPressed: () => _selectDateTime(controller),
         ),
       ),
@@ -186,7 +263,7 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
       );
       if (time != null) {
         final DateTime fullDateTime = DateTime(
-            picked.year, picked.month, picked.day, time.hour, time.minute);
+          picked.year, picked.month, picked.day, time.hour, time.minute);
         controller.text = _dateFormat.format(fullDateTime);
       }
     }
@@ -195,10 +272,10 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
   Widget _buildQuantitySelector() {
     return Row(
       children: [
-        Text('Food Quantity'),
-        Spacer(),
+        const Text('Food Quantity'),
+        const Spacer(),
         IconButton(
-          icon: Icon(Icons.remove_circle_outline),
+          icon: const Icon(Icons.remove_circle_outline),
           color: kPrimaryLight,
           onPressed: () {
             if (_quantity > 1) {
@@ -210,7 +287,7 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
         ),
         Text('$_quantity'),
         IconButton(
-          icon: Icon(Icons.add_circle_outline),
+          icon: const Icon(Icons.add_circle_outline),
           color: kPrimaryLight,
           onPressed: () {
             setState(() {
@@ -226,10 +303,10 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Type of vehicle needed?'),
+        const Text('Type of vehicle needed?'),
         Row(
           children: [
-            Icon(Icons.pedal_bike),
+            const Icon(Icons.pedal_bike),
             Radio(
               value: 'Bike',
               groupValue: _vehicleType,
@@ -240,7 +317,7 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
               },
               activeColor: kPrimaryLight,
             ),
-            Icon(Icons.directions_car),
+            const Icon(Icons.directions_car),
             Radio(
               value: 'Car',
               groupValue: _vehicleType,
@@ -259,7 +336,8 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
 
   Widget _buildWishMessageField() {
     return TextFormField(
-      decoration: InputDecoration(
+      controller: _wishMessageController,
+      decoration:const  InputDecoration(
         labelText: 'Do you want to send a wish message?',
         border: OutlineInputBorder(),
       ),
@@ -271,7 +349,7 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Donate anonymously?'),
+        const Text('Donate anonymously?'),
         Switch(
           value: _isAnonymous,
           onChanged: (value) {
@@ -283,22 +361,5 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
         ),
       ],
     );
-  }
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ConfirmationPage(
-                  selectedSource: _selectedSource,
-                  foodType: _foodType,
-                  vehicleType: _vehicleType,
-                  quantity: _quantity,
-                  isAnonymous: _isAnonymous,
-                  // Add other form values as needed
-                )),
-      );
-    }
   }
 }
