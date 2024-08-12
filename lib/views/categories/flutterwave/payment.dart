@@ -131,3 +131,81 @@ class _PaymentFormState extends State<PaymentForm> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                     ),
+                    child: Text(
+                      "Pay now",
+                      style: TextStyle(color: Color(0xffffffff)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _makePayment(BuildContext context) async {
+    final Customer customer = Customer(
+      name: "Test User",
+      phoneNumber: _phoneController.text,
+      email: _emailController.text,
+    );
+
+    final Flutterwave flutterwave = Flutterwave(
+      context: context,
+      publicKey: "FLWPUBK_TEST-e95e5a70e687c4d58467ca9c0522a1a5-X",
+      currency: "UGX",
+      amount: _amountController.text,
+      customer: customer,
+      paymentOptions: "card, mobilemoneyuganda",
+      txRef: "TXREF-${DateTime.now().millisecondsSinceEpoch}",
+      isTestMode: true,
+      customization: Customization(
+        title: "Test Payment",
+        description: "Payment for testing",
+        logo: "https://your-logo-url.com/logo.png",
+      ),
+      redirectUrl: "https://example.com",
+    );
+
+    try {
+      final ChargeResponse response = await flutterwave.charge();
+      widget.onPaymentProcessed(true);
+      _showMessage(context, "Payment processed successfully");
+      Navigator.pop(context, true);
+    } catch (error) {
+      widget.onPaymentProcessed(false);
+      _showMessage(context, "An error occurred during payment");
+      Navigator.pop(context, false);
+    }
+  }
+
+  void _showMessage(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Payment Status"),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _amountController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
+}
